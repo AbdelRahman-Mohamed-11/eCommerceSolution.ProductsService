@@ -1,5 +1,3 @@
-namespace ProductsMicroService.BusinessLogic.Dtos;
-
 public record ProductUpdateDto(
     Guid Id,
     string Name,

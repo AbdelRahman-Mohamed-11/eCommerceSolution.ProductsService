@@ -1,5 +1,3 @@
-namespace ProductsMicroService.BusinessLogic.Dtos;
-
 public record GetByIdProductDto(
     Guid Id,
     string Name,
