@@ -1,4 +1,4 @@
-# 🛍️ Products Microservice (Modern N-Tier Architecture)
+# 🛍️ Products Microservice (With Modern N-Tier Architecture)
 
 This project is part of an eCommerce solution built using a **modern N-Tier architecture**. It enforces strict separation of concerns, where the **Business Logic Layer is isolated from the Data Access Layer**. This architecture supports high maintainability, testability, and scalability.
 
@@ -26,7 +26,7 @@ eCommerceSolution.ProductsService
 
 ## 🔧 Tech Stack
 
-- **.NET 8**
+- **.NET 9**
 - **ASP.NET Core Web API (Minimal APIs)**
 - **Entity Framework Core (with MySQL)**
 - **MediatR** – for CQRS pattern
