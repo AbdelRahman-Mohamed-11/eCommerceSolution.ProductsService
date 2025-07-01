@@ -69,9 +69,9 @@ public class ProductService : IProductService
             : Result<GetByIdProductDto?>.Success(product);
     }
 
-    public async Task<Result<IReadOnlyList<ListProductDto>>> ListAsync()
+    public async Task<Result<IReadOnlyList<ListProductDto>>> ListAsync(string? search)
     {
-        var spec = new ProductListSpecification();
+        var spec = new ProductListSpecification(search);
         var products = await _unitOfWork.Products.ListAsync(spec);
         return Result<IReadOnlyList<ListProductDto>>.Success(products);
     }

@@ -1,7 +1,9 @@
+using Microsoft.EntityFrameworkCore;
 using ProductsMicroService.API.Extensions;
 using ProductsMicroService.API.Middlewares;
 using ProductsMicroService.BusinessLogic;
 using ProductsMicroService.DataAccess;
+using ProductsMicroService.DataAccess.Context;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +13,6 @@ builder.Services.AddDataAccess(builder.Configuration)
     .AddBusinessLogic(builder.Configuration);
 
 builder.Services.AddControllers();
-
-
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
@@ -34,7 +34,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins("https://localhost:4200")
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
@@ -64,5 +64,10 @@ app.MapProductEndpoints()
 
 app.MapControllers();
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ProductsDbContext>();
+    await db.Database.MigrateAsync();
+}
 
 await app.RunAsync();

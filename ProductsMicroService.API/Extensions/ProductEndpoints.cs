@@ -10,9 +10,9 @@ public static class ProductEndpoints
         var group = app.MapGroup("/api/products")
                        .WithTags("Products"); 
 
-        group.MapGet("/", async (IProductService service) =>
+        group.MapGet("/", async (IProductService service, string? search) =>
         {
-            var result = await service.ListAsync();
+            var result = await service.ListAsync(search);
             return result.IsSuccess
                 ? Results.Ok(result.Value)
                 : Results.Problem(result.Error, statusCode: result.StatusCode);

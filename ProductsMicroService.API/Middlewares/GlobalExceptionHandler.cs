@@ -31,15 +31,8 @@ public class GlobalExceptionHandler(
         problemDetails.Extensions["correlationId"] = correlationId;
         problemDetails.Extensions["code"] = "UNEXPECTED_ERROR";
 
-        if (env.IsDevelopment())
-        {
-            problemDetails.Detail = GetFullExceptionMessage(exception);
-            problemDetails.Extensions["exception"] = GetExceptionDetails(exception);
-        }
-        else
-        {
-            problemDetails.Detail = "An error occurred while processing your request. Please try again later.";
-        }
+        problemDetails.Detail = GetFullExceptionMessage(exception);
+        problemDetails.Extensions["exception"] = GetExceptionDetails(exception);
 
         httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
         httpContext.Response.ContentType = "application/problem+json";
